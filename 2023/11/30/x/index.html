@@ -1,20 +1,8 @@
-extends partial/layout.pug
+{%- extends "_layout.swig" -%}
+{%- import '_macro/post.swig' as post_template -%}
 
-block site_title
-    != page.title + ' • ' + config.title
+{%- block title -%} {{ page.title }} - {{ config.title }} {%- endblock -%}
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name='description', content=desc)
-
-block container
-    include mixins/post.pug
-    +post(page)
-
-block pagination
-    include mixins/paginator.pug
-    +post()
-    include partial/comment.pug
-
-block copyright
-    include partial/copyright.pug
+{%- block content -%}
+  {{ post_template.render(page) }}
+{%- endblock -%}

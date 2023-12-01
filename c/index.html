@@ -1,20 +1,11 @@
-extends partial/layout.pug
+{%- extends "_layout.swig" -%}
 
-block site_title
-    != page.title + ' • ' + config.title
+{%- block title -%} {{ page.title }} - {{ config.title }} {%- endblock -%}
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name='description', content=desc)
-
-block container
-    include mixins/post.pug
-    .post
-        article.post-block
-            h1.post-title
-                +postTitle(page.title)
-            .post-content
-                != page.content
-
-block copyright
-    include partial/copyright.pug
+{%- block content -%}
+  <article class="post">
+    <div class="post-content">
+      {{ page.content }}
+    </div>
+  </article>
+{%- endblock -%}
